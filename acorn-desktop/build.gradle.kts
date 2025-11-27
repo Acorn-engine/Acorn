@@ -6,6 +6,7 @@ plugins {
 dependencies {
     implementation(kotlin("stdlib"))
     implementation(project(":acorn-core"))
+    implementation(project(":acorn-sample"))
 
     val lwjglVersion = "3.3.6"
     implementation("org.lwjgl:lwjgl:$lwjglVersion")
