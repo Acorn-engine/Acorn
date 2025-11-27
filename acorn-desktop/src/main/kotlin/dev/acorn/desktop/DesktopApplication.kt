@@ -1,5 +1,6 @@
 package dev.acorn.desktop
 
+import dev.acorn.core.WindowConfig
 import org.lwjgl.glfw.GLFW.GLFW_FALSE
 import org.lwjgl.glfw.GLFW.GLFW_RESIZABLE
 import org.lwjgl.glfw.GLFW.GLFW_TRUE
@@ -21,7 +22,7 @@ import org.lwjgl.opengl.GL
 import org.lwjgl.system.MemoryUtil.NULL
 
 object DesktopApplication {
-    fun run() {
+    fun run(windowConfig: WindowConfig = WindowConfig()) {
         if(!glfwInit()) {
             throw IllegalStateException("Failed to initialize GLFW")
         }
@@ -30,7 +31,15 @@ object DesktopApplication {
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE)
         glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE)
 
-        val window = glfwCreateWindow(1280, 720, "Acorn", glfwGetPrimaryMonitor(), NULL)
+        val monitor = if(windowConfig.fullscreen) glfwGetPrimaryMonitor() else NULL
+        val window = glfwCreateWindow(
+            windowConfig.width,
+            windowConfig.height,
+            windowConfig.title,
+            monitor,
+            NULL
+        )
+
         if(window == NULL) {
             glfwTerminate()
             throw IllegalStateException("Failed to create the GLFW window")
@@ -41,6 +50,9 @@ object DesktopApplication {
         glfwShowWindow(window)
 
         GL.createCapabilities()
+
+        val context = DesktopGameContext(windowConfig)
+
         while(!glfwWindowShouldClose(window)) {
             glfwPollEvents()
             glfwSwapBuffers(window)

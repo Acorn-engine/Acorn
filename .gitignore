@@ -30,3 +30,7 @@ bin/
 
 ### Mac OS ###
 .DS_Store
+
+/acorn-core/build
+/acorn-desktop/build
+/acorn-sample/build
