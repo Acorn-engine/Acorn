@@ -1,5 +1,5 @@
 package dev.acorn.desktop
 
 fun main() {
-    println("Hello world!")
+    DesktopApplication.run()
 }

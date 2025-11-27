@@ -13,11 +13,14 @@ dependencies {
     implementation("org.lwjgl:lwjgl-opengl:$lwjglVersion")
 
     val os = org.gradle.internal.os.OperatingSystem.current()
+    val arch = System.getProperty("os.arch")
+
     val lwjglNatives = when {
-        os.isWindows -> "natives-windows"
-        os.isMacOsX -> "natives-macos"
-        os.isLinux -> "natives-linux"
-        else -> error("Unsupported operating system: $os")
+        os.isWindows && arch.contains("64") -> "natives-windows"
+        os.isLinux && arch.contains("64")   -> "natives-linux"
+        os.isMacOsX && arch == "aarch64"            -> "natives-macos-arm64"
+        os.isMacOsX                                 -> "natives-macos"
+        else -> error("Unsupported platform: ${os.name} $arch")
     }
 
     runtimeOnly("org.lwjgl:lwjgl:$lwjglVersion:$lwjglNatives")
@@ -29,4 +32,9 @@ dependencies {
 
 application {
     mainClass.set("dev.acorn.desktop.DesktopLauncherKt")
+
+    applicationDefaultJvmArgs = listOf(
+        "-XstartOnFirstThread",
+        "--enable-native-access=ALL-UNNAMED"
+    )
 }
