@@ -24,10 +24,13 @@ import org.lwjgl.opengl.GL
 import org.lwjgl.system.MemoryUtil.NULL
 
 object DesktopApplication {
-    fun run(game: Acorn, windowConfig: WindowConfig = WindowConfig()) {
+    fun run(game: Acorn) {
         if(!glfwInit()) {
             throw IllegalStateException("Failed to initialize GLFW")
         }
+
+        val windowConfig = WindowConfig()
+        game.configureWindow(windowConfig)
 
         glfwDefaultWindowHints()
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE)

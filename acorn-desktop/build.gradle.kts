@@ -1,12 +1,10 @@
 plugins {
     kotlin("jvm")
-    application
 }
 
 dependencies {
     implementation(kotlin("stdlib"))
     implementation(project(":acorn-core"))
-    implementation(project(":acorn-sample"))
 
     val lwjglVersion = "3.3.6"
     implementation("org.lwjgl:lwjgl:$lwjglVersion")
@@ -29,13 +27,4 @@ dependencies {
     runtimeOnly("org.lwjgl:lwjgl-opengl:$lwjglVersion:$lwjglNatives")
 
     testImplementation(kotlin("test"))
-}
-
-application {
-    mainClass.set("dev.acorn.desktop.DesktopLauncherKt")
-
-    applicationDefaultJvmArgs = listOf(
-        "-XstartOnFirstThread",
-        "--enable-native-access=ALL-UNNAMED"
-    )
 }

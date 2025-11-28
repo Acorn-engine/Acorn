@@ -3,10 +3,17 @@ package dev.acorn.sample
 import dev.acorn.core.Acorn
 import dev.acorn.core.GameContext
 import dev.acorn.core.Renderer
+import dev.acorn.core.WindowConfig
 import kotlin.math.sin
 
 class TestGame : Acorn {
     private var hueTime = 0f
+
+    override fun configureWindow(config: WindowConfig) {
+        config.width = 1920
+        config.height = 1080
+        config.title = "Acorn test game"
+    }
 
     override fun setup(context: GameContext) {
         println("TestGame started")
