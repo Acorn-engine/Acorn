@@ -34,3 +34,5 @@ bin/
 /acorn-core/build
 /acorn-desktop/build
 /acorn-sample/build
+
+.gradle/
