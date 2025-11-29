@@ -1,5 +1,7 @@
 package dev.acorn.core
 
+import dev.acorn.core.gameobject.Transform
+
 interface Renderer {
     fun clear(r: Float, g: Float, b: Float, a: Float)
 

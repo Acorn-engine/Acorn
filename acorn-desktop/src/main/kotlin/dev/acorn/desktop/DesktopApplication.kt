@@ -1,7 +1,7 @@
 package dev.acorn.desktop
 
 import dev.acorn.core.Acorn
-import dev.acorn.core.WindowConfig
+import dev.acorn.core.gameobject.WindowConfig
 import org.lwjgl.glfw.GLFW.GLFW_FALSE
 import org.lwjgl.glfw.GLFW.GLFW_RESIZABLE
 import org.lwjgl.glfw.GLFW.GLFW_TRUE

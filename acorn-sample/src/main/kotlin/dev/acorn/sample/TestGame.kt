@@ -1,9 +1,9 @@
 package dev.acorn.sample
 
 import dev.acorn.core.Acorn
-import dev.acorn.core.GameContext
+import dev.acorn.core.gameobject.GameContext
 import dev.acorn.core.Renderer
-import dev.acorn.core.WindowConfig
+import dev.acorn.core.gameobject.WindowConfig
 import kotlin.math.sin
 
 class TestGame : Acorn {

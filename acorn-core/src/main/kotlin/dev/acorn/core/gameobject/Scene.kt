@@ -1,4 +1,6 @@
-package dev.acorn.core
+package dev.acorn.core.gameobject
+
+import dev.acorn.core.Renderer
 
 class Scene {
     private val objects = mutableListOf<GameObject>()

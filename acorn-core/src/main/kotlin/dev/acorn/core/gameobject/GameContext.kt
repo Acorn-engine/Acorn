@@ -1,4 +1,4 @@
-package dev.acorn.core
+package dev.acorn.core.gameobject
 
 data class WindowConfig(
     var width: Int = 1280,
