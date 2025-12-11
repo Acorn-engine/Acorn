@@ -7,4 +7,6 @@ interface Renderer {
 
     fun drawRect(transform: Transform, color: Color)
     fun drawCircle(transform: Transform, color: Color, segments: Int = 32)
+
+    fun drawSprite(transform: Transform, sprite: Sprite)
 }
