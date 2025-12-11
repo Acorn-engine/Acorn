@@ -14,12 +14,7 @@ class DesktopRenderer : Renderer {
     }
 
     override fun drawRect(transform: Transform, color: Color) {
-        glPushMatrix()
-        glTranslatef(transform.position.x, transform.position.y, 0f)
-        glRotatef(transform.rotationDeg, 0f, 0f, 1f)
-        glScalef(transform.scale.x, transform.scale.y, 1f)
-
-        glColor4f(color.r, color.g, color.b, color.a)
+        setupDrawing(transform, color)
 
         glBegin(GL_TRIANGLES)
         glVertex2f(-0.5f, -0.5f)
@@ -35,12 +30,7 @@ class DesktopRenderer : Renderer {
     }
 
     override fun drawCircle(transform: Transform, color: Color, segments: Int) {
-        glPushMatrix()
-        glTranslatef(transform.position.x, transform.position.y, 0f)
-        glRotatef(transform.rotationDeg, 0f, 0f, 1f)
-        glScalef(transform.scale.x, transform.scale.y, 1f)
-
-        glColor4f(color.r, color.g, color.b, color.a)
+        setupDrawing(transform, color)
 
         glBegin(GL_TRIANGLE_FAN)
         glVertex2f(0f, 0f)
@@ -56,5 +46,14 @@ class DesktopRenderer : Renderer {
 
         glEnd()
         glPopMatrix()
+    }
+
+    private fun setupDrawing(transform: Transform, color: Color) {
+        glPushMatrix()
+        glTranslatef(transform.position.x, transform.position.y, 0f)
+        glRotatef(transform.rotationDeg, 0f, 0f, 1f)
+        glScalef(transform.scale.x, transform.scale.y, 1f)
+
+        glColor4f(color.r, color.g, color.b, color.a)
     }
 }
