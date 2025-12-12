@@ -52,9 +52,13 @@ class DesktopRenderer : Renderer {
     override fun drawSprite(transform: Transform, sprite: Sprite) {
         val tex = sprite.texture as DesktopTexture
 
-        setupDrawing(transform, sprite.tint)
+        glPushMatrix()
+        glTranslatef(transform.position.x, transform.position.y, 0f)
+        glRotatef(transform.rotationDeg, 0f, 0f, 1f)
+        glScalef(transform.scale.x, transform.scale.y, 1f)
         glEnable(GL_TEXTURE_2D)
         glBindTexture(GL_TEXTURE_2D, tex.id)
+        glColor4f(sprite.tint.r, sprite.tint.g, sprite.tint.b, sprite.tint.a)
 
         glBegin(GL_QUADS)
         glTexCoord2f(0f, 0f); glVertex2f(-0.5f, -0.5f)

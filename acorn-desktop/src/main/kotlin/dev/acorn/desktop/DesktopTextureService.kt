@@ -2,6 +2,7 @@ package dev.acorn.desktop
 
 import dev.acorn.core.TextureHandle
 import dev.acorn.core.gameobject.TextureService
+import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL11.*
 import org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE
 import org.lwjgl.stb.STBImage.*
@@ -13,7 +14,11 @@ class DesktopTextureService: TextureService {
         val resource = javaClass.classLoader.getResource(path)
             ?: throw IllegalArgumentException("Texture resource $path not found")
 
-        val imageBytes = resource.readBytes()
+        val bytes = resource.openStream().use { it.readBytes() }
+        val buffer: ByteBuffer = BufferUtils.createByteBuffer(bytes.size)
+        buffer.put(bytes)
+        buffer.flip()
+
         stackPush().use { stack ->
             val w = stack.mallocInt(1)
             val h = stack.mallocInt(1)
@@ -21,7 +26,6 @@ class DesktopTextureService: TextureService {
 
             stbi_set_flip_vertically_on_load(true)
 
-            val buffer: ByteBuffer = ByteBuffer.wrap(imageBytes)
             val image = stbi_load_from_memory(buffer, w, h, channels, 4)
                 ?: error("Failed to load image: ${stbi_failure_reason()}")
 
