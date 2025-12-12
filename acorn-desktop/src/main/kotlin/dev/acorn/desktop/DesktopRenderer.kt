@@ -2,6 +2,7 @@ package dev.acorn.desktop
 
 import dev.acorn.core.Color
 import dev.acorn.core.Renderer
+import dev.acorn.core.Sprite
 import dev.acorn.core.gameobject.Transform
 import org.lwjgl.opengl.GL11.*
 import kotlin.math.cos
@@ -45,6 +46,24 @@ class DesktopRenderer : Renderer {
         }
 
         glEnd()
+        glPopMatrix()
+    }
+
+    override fun drawSprite(transform: Transform, sprite: Sprite) {
+        val tex = sprite.texture as DesktopTexture
+
+        setupDrawing(transform, sprite.tint)
+        glEnable(GL_TEXTURE_2D)
+        glBindTexture(GL_TEXTURE_2D, tex.id)
+
+        glBegin(GL_QUADS)
+        glTexCoord2f(0f, 0f); glVertex2f(-0.5f, -0.5f)
+        glTexCoord2f(1f, 0f); glVertex2f( 0.5f, -0.5f)
+        glTexCoord2f(1f, 1f); glVertex2f( 0.5f,  0.5f)
+        glTexCoord2f(0f, 1f); glVertex2f(-0.5f,  0.5f)
+        glEnd()
+
+        glDisable(GL_TEXTURE_2D)
         glPopMatrix()
     }
 

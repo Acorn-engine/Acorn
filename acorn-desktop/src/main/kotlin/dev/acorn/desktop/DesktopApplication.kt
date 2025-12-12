@@ -55,7 +55,8 @@ object DesktopApplication {
         glEnable(GL_BLEND)
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
-        val context = DesktopGameContext(windowConfig)
+        val textureService = DesktopTextureService()
+        val context = DesktopGameContext(windowConfig, textureService)
         val renderer = DesktopRenderer()
         game.setup(context)
 

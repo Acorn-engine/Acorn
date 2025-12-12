@@ -15,4 +15,5 @@ interface TextureService {
 
 interface GameContext {
     val window: WindowConfig
+    val textures: TextureService
 }
