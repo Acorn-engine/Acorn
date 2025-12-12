@@ -10,6 +10,7 @@ dependencies {
     implementation("org.lwjgl:lwjgl:$lwjglVersion")
     implementation("org.lwjgl:lwjgl-glfw:$lwjglVersion")
     implementation("org.lwjgl:lwjgl-opengl:$lwjglVersion")
+    implementation("org.lwjgl:lwjgl-stb:$lwjglVersion")
 
     val os = org.gradle.internal.os.OperatingSystem.current()
     val arch = System.getProperty("os.arch")
@@ -25,6 +26,7 @@ dependencies {
     runtimeOnly("org.lwjgl:lwjgl:$lwjglVersion:$lwjglNatives")
     runtimeOnly("org.lwjgl:lwjgl-glfw:$lwjglVersion:$lwjglNatives")
     runtimeOnly("org.lwjgl:lwjgl-opengl:$lwjglVersion:$lwjglNatives")
+    runtimeOnly("org.lwjgl:lwjgl-stb:$lwjglVersion:$lwjglNatives")
 
     testImplementation(kotlin("test"))
 }

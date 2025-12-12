@@ -1,4 +1,6 @@
-package dev.acorn.core
+package dev.acorn.core.gameobject
+
+import dev.acorn.core.TextureHandle
 
 data class WindowConfig(
     var width: Int = 1280,
@@ -7,6 +9,11 @@ data class WindowConfig(
     val fullscreen: Boolean = false
 )
 
+interface TextureService {
+    fun load(path: String): TextureHandle
+}
+
 interface GameContext {
     val window: WindowConfig
+    val textures: TextureService
 }
