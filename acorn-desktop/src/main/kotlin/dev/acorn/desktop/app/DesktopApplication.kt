@@ -1,7 +1,9 @@
-package dev.acorn.desktop
+package dev.acorn.desktop.app
 
 import dev.acorn.core.Acorn
 import dev.acorn.core.content.WindowConfig
+import dev.acorn.desktop.render.DesktopRenderer
+import dev.acorn.desktop.gl.texture.DesktopTextureService
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.opengl.GL
 import org.lwjgl.opengl.GL11.*

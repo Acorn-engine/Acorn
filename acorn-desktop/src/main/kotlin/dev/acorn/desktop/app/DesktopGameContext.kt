@@ -1,4 +1,4 @@
-package dev.acorn.desktop
+package dev.acorn.desktop.app
 
 import dev.acorn.core.assets.TextureService
 import dev.acorn.core.content.GameContext

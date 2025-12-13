@@ -1,4 +1,4 @@
-package dev.acorn.desktop
+package dev.acorn.desktop.gl.texture
 
 import dev.acorn.core.assets.TextureHandle
 import dev.acorn.core.assets.TextureService
