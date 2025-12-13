@@ -5,6 +5,7 @@ import dev.acorn.core.assets.Sprite
 import dev.acorn.core.components.SpriteRenderer
 import dev.acorn.core.content.GameContext
 import dev.acorn.core.content.WindowConfig
+import dev.acorn.core.math.Color
 import dev.acorn.core.math.Vec2
 import dev.acorn.core.render.Renderer
 import dev.acorn.core.scene.GameObject
@@ -45,7 +46,7 @@ class TestGame : Acorn {
     }
 
     override fun render(renderer: Renderer) {
-        renderer.clear(0.1f, 0.1f, 0.1f, 1f)
+        renderer.clear(Color.BLACK)
         scene.render(renderer)
     }
 }

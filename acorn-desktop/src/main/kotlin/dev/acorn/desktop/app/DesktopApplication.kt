@@ -11,9 +11,7 @@ import org.lwjgl.opengl.GL11.*
 
 object DesktopApplication {
     fun run(game: Acorn) {
-        if(!glfwInit()) {
-            throw IllegalStateException("Failed to initialize GLFW")
-        }
+        require(glfwInit()) { "Unable to initialize GLFW" }
 
         val config = WindowConfig()
         game.configureWindow(config)
@@ -25,27 +23,31 @@ object DesktopApplication {
         glEnable(GL_BLEND)
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
-        val textureService = DesktopTextureService()
-        val context = DesktopGameContext(config, textureService)
+        val textures = DesktopTextureService()
+        val context = DesktopGameContext(config, textures)
         val renderer = DesktopRenderer()
 
         game.setup(context)
 
-        var lastTime = glfwGetTime()
-        while(!glfwWindowShouldClose(window.handle)) {
-            val now = glfwGetTime()
-            val dt = (now - lastTime).toFloat()
-            lastTime = now
+        val fb = IntArray(2)
+        var last = glfwGetTime()
 
-            glfwPollEvents()
+        while(!window.shouldClose()) {
+            val now = glfwGetTime()
+            val dt = (now - last).toFloat()
+            last = now
+
+            window.pollEvents()
+            window.framebufferSize(fb)
+            renderer.beginFrame(fb[0], fb[1])
 
             game.update(dt)
             game.render(renderer)
 
-            glfwSwapBuffers(window.handle)
+            window.swapBuffers()
         }
 
-        glfwDestroyWindow(window.handle)
+        window.destroy()
         glfwTerminate()
     }
 }
