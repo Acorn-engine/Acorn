@@ -1,6 +1,6 @@
 package dev.acorn.core.gameobject
 
-import dev.acorn.core.Renderer
+import dev.acorn.core.render.Renderer
 
 abstract class Component {
     lateinit var gameObject: GameObject

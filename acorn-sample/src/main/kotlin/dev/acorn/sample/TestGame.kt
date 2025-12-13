@@ -1,6 +1,7 @@
 package dev.acorn.sample
 
 import dev.acorn.core.*
+import dev.acorn.core.components.SpriteRenderer
 import dev.acorn.core.gameobject.*
 
 class TestGame : Acorn {
