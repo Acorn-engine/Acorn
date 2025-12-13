@@ -6,6 +6,8 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation(project(":acorn-core"))
 
+    implementation("org.joml:joml:1.10.6")
+
     val lwjglVersion = "3.3.6"
     implementation("org.lwjgl:lwjgl:$lwjglVersion")
     implementation("org.lwjgl:lwjgl-glfw:$lwjglVersion")
