@@ -1,7 +1,8 @@
 package dev.acorn.core
 
-import dev.acorn.core.gameobject.GameContext
-import dev.acorn.core.gameobject.WindowConfig
+import dev.acorn.core.content.GameContext
+import dev.acorn.core.content.WindowConfig
+import dev.acorn.core.render.Renderer
 
 interface Acorn {
     fun configureWindow(config: WindowConfig)

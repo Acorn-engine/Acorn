@@ -1,11 +1,9 @@
 package dev.acorn.core.components
 
-import dev.acorn.core.Sprite
-import dev.acorn.core.gameobject.Component
-import dev.acorn.core.gameobject.ShapeType
-import dev.acorn.core.gameobject.SpriteShapeRenderer
+import dev.acorn.core.assets.Sprite
 import dev.acorn.core.render.Renderer
 import dev.acorn.core.render.SpriteMask
+import dev.acorn.core.scene.Component
 
 class SpriteRenderer(var sprite: Sprite): Component() {
     override fun render(renderer: Renderer) {

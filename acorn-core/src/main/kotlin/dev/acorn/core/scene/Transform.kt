@@ -1,6 +1,6 @@
-package dev.acorn.core.gameobject
+package dev.acorn.core.scene
 
-import dev.acorn.core.Vec2
+import dev.acorn.core.math.Vec2
 
 data class Transform(
     var position: Vec2 = Vec2(0f, 0f),

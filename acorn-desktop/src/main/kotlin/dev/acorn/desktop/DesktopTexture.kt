@@ -1,5 +1,5 @@
 package dev.acorn.desktop
 
-import dev.acorn.core.TextureHandle
+import dev.acorn.core.assets.TextureHandle
 
 class DesktopTexture(val id: Int, val width: Int, val height: Int): TextureHandle

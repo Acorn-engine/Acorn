@@ -1,12 +1,8 @@
-package dev.acorn.core.gameobject
+package dev.acorn.core.components
 
-import dev.acorn.core.Color
-import dev.acorn.core.Renderer
-
-enum class ShapeType {
-    RECT,
-    CIRCLE
-}
+import dev.acorn.core.math.Color
+import dev.acorn.core.render.Renderer
+import dev.acorn.core.scene.Component
 
 class SpriteShapeRenderer(
     var shape: ShapeType = ShapeType.RECT,

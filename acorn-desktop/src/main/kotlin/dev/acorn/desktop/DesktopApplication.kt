@@ -1,7 +1,7 @@
 package dev.acorn.desktop
 
 import dev.acorn.core.Acorn
-import dev.acorn.core.gameobject.WindowConfig
+import dev.acorn.core.content.WindowConfig
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.opengl.GL
 import org.lwjgl.opengl.GL11.*

@@ -1,8 +1,8 @@
 package dev.acorn.desktop
 
-import dev.acorn.core.gameobject.GameContext
-import dev.acorn.core.gameobject.TextureService
-import dev.acorn.core.gameobject.WindowConfig
+import dev.acorn.core.assets.TextureService
+import dev.acorn.core.content.GameContext
+import dev.acorn.core.content.WindowConfig
 
 class DesktopGameContext(
     override val window: WindowConfig,

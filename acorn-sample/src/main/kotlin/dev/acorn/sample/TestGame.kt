@@ -1,8 +1,15 @@
 package dev.acorn.sample
 
-import dev.acorn.core.*
+import dev.acorn.core.Acorn
+import dev.acorn.core.assets.Sprite
 import dev.acorn.core.components.SpriteRenderer
-import dev.acorn.core.gameobject.*
+import dev.acorn.core.content.GameContext
+import dev.acorn.core.content.WindowConfig
+import dev.acorn.core.math.Vec2
+import dev.acorn.core.render.Renderer
+import dev.acorn.core.scene.GameObject
+import dev.acorn.core.scene.Scene
+import dev.acorn.core.scene.Transform
 
 class TestGame : Acorn {
     private val scene = Scene()

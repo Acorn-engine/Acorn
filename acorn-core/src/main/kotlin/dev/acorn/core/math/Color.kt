@@ -1,5 +1,4 @@
-package dev.acorn.core
-
+package dev.acorn.core.math
 
 @JvmInline
 value class Color(val argb: Int) {

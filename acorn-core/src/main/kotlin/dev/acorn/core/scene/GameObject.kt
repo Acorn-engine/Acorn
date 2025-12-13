@@ -1,16 +1,6 @@
-package dev.acorn.core.gameobject
+package dev.acorn.core.scene
 
 import dev.acorn.core.render.Renderer
-
-abstract class Component {
-    lateinit var gameObject: GameObject
-        internal set
-
-    open fun onAdded() {}
-    open fun onRemoved() {}
-    open fun update(dt: Float) {}
-    open fun render(renderer: Renderer) {}
-}
 
 class GameObject(val transform: Transform = Transform()) {
     private val components = mutableListOf<Component>()

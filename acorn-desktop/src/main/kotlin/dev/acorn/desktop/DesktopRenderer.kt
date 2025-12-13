@@ -1,9 +1,10 @@
 package dev.acorn.desktop
 
-import dev.acorn.core.Color
-import dev.acorn.core.Renderer
-import dev.acorn.core.Sprite
-import dev.acorn.core.gameobject.Transform
+import dev.acorn.core.assets.Sprite
+import dev.acorn.core.math.Color
+import dev.acorn.core.render.Renderer
+import dev.acorn.core.render.SpriteMask
+import dev.acorn.core.scene.Transform
 import org.lwjgl.opengl.GL11.*
 import kotlin.math.cos
 import kotlin.math.sin
@@ -49,7 +50,7 @@ class DesktopRenderer : Renderer {
         glPopMatrix()
     }
 
-    override fun drawSprite(transform: Transform, sprite: Sprite) {
+    override fun drawSprite(transform: Transform, sprite: Sprite, mask: SpriteMask) {
         val tex = sprite.texture as DesktopTexture
 
         glPushMatrix()

@@ -1,7 +1,7 @@
 package dev.acorn.desktop
 
-import dev.acorn.core.TextureHandle
-import dev.acorn.core.gameobject.TextureService
+import dev.acorn.core.assets.TextureHandle
+import dev.acorn.core.assets.TextureService
 import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL11.*
 import org.lwjgl.opengl.GL12.GL_CLAMP_TO_EDGE

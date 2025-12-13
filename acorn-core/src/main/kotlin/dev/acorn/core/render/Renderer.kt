@@ -1,8 +1,8 @@
 package dev.acorn.core.render
 
-import dev.acorn.core.Color
-import dev.acorn.core.Sprite
-import dev.acorn.core.gameobject.Transform
+import dev.acorn.core.assets.Sprite
+import dev.acorn.core.math.Color
+import dev.acorn.core.scene.Transform
 
 interface Renderer {
     fun clear(r: Float, g: Float, b: Float, a: Float)
