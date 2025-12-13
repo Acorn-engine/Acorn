@@ -29,6 +29,7 @@ object DesktopApplication {
 
         game.setup(context)
 
+        val win = IntArray(2)
         val fb = IntArray(2)
         var last = glfwGetTime()
 
@@ -38,8 +39,9 @@ object DesktopApplication {
             last = now
 
             window.pollEvents()
+            window.windowSize(win)
             window.framebufferSize(fb)
-            renderer.beginFrame(fb[0], fb[1])
+            renderer.beginFrame(win[0], win[1], fb[0], fb[1])
 
             game.update(dt)
             game.render(renderer)

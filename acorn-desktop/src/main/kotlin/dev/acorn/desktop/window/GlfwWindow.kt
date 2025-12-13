@@ -30,5 +30,14 @@ class GlfwWindow(width: Int, height: Int, title: String, fullscreen: Boolean) {
         out[1] = h[0]
     }
 
+    fun windowSize(out: IntArray) {
+        val w = IntArray(1)
+        val h = IntArray(1)
+        glfwGetWindowSize(handle, w, h)
+
+        out[0] = w[0]
+        out[1] = h[0]
+    }
+
     fun destroy() = glfwDestroyWindow(handle)
 }

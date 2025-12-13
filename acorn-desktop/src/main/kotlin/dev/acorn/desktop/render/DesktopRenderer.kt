@@ -16,9 +16,9 @@ class DesktopRenderer : Renderer {
     private val spritePipeline = SpritePipeline()
     private val projection = Matrix4f()
 
-    fun beginFrame(width: Int, height: Int) {
-        glViewport(0, 0, width, height)
-        projection.setOrtho2D(0f, width.toFloat(), 0f, height.toFloat())
+    fun beginFrame(windowW: Int, windowH: Int, framebufferW: Int, framebufferH: Int) {
+        glViewport(0, 0, framebufferW, framebufferH)
+        projection.setOrtho2D(0f, windowW.toFloat(), 0f, windowH.toFloat())
     }
 
     override fun clear(color: Color) {
