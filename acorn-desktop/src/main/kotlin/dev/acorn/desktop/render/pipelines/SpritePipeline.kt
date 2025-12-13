@@ -1,0 +1,46 @@
+package dev.acorn.desktop.render.pipelines
+
+import dev.acorn.core.math.Color
+import dev.acorn.desktop.gl.mesh.QuadMesh
+import dev.acorn.desktop.gl.shader.ShaderProgram
+import dev.acorn.desktop.gl.shader.ShaderSources
+import dev.acorn.desktop.gl.texture.DesktopTexture
+import org.joml.Matrix4f
+import org.lwjgl.opengl.GL11.GL_TEXTURE_2D
+import org.lwjgl.opengl.GL11.glBindTexture
+import org.lwjgl.opengl.GL13.GL_TEXTURE0
+import org.lwjgl.opengl.GL13.glActiveTexture
+import org.lwjgl.opengl.GL20.glGetUniformLocation
+import org.lwjgl.opengl.GL20.glUniformMatrix4fv
+import org.lwjgl.system.MemoryStack
+
+class SpritePipeline {
+    private val shader = ShaderProgram(ShaderSources.VERT, ShaderSources.FRAG)
+    private val mesh = QuadMesh()
+
+    fun draw(proj: Matrix4f, model: Matrix4f, tex: DesktopTexture, tint: Color, circleMask: Boolean) {
+        shader.use()
+
+        MemoryStack.stackPush().use { stack ->
+            val pBuf = stack.mallocFloat(16)
+            val mBuf = stack.mallocFloat(16)
+            proj.get(pBuf)
+            model.get(mBuf)
+
+            glUniformMatrix4fv(glGetUniformLocation(shader.id, "uProjection"), false, pBuf)
+            glUniformMatrix4fv(glGetUniformLocation(shader.id, "uModel"), false, mBuf)
+        }
+
+        glActiveTexture(GL_TEXTURE0)
+        glBindTexture(GL_TEXTURE_2D, tex.id)
+        shader.uniform1i("uTex", 0)
+
+        shader.uniform4f("uColor", tint.r, tint.g, tint.b, tint.a)
+        shader.uniform1i("uUseTexture", 1)
+        shader.uniform1i("uMaskType", if (circleMask) 1 else 0)
+
+        mesh.draw()
+
+        glBindTexture(GL_TEXTURE_2D, 0)
+    }
+}
