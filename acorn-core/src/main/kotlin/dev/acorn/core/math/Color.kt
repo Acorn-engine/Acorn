@@ -1,10 +1,21 @@
 package dev.acorn.core.math
 
+/**
+ * [dev.acorn.core.math.Color] utility class, stores common functions and colors for you to use
+ *
+ * @param argb The ARGB value of the color
+ */
 @JvmInline
 value class Color(val argb: Int) {
     companion object {
+        /**
+         * Converts an ARGB color into a [dev.acorn.core.math.Color]
+         */
         fun fromARGB(argb: Int): Color = Color(argb)
 
+        /**
+         * Converts a RGB color into a [dev.acorn.core.math.Color]
+         */
         fun fromRGB(rgb: Int): Color =
             Color((0xFF shl 24) or (rgb and 0x00FFFFFF))
 
