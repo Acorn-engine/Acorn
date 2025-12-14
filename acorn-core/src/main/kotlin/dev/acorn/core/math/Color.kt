@@ -14,7 +14,7 @@ value class Color(val argb: Int) {
         fun fromARGB(argb: Int): Color = Color(argb)
 
         /**
-         * Converts a RGB color into a [dev.acorn.core.math.Color]
+         * Converts an RGB color into a [dev.acorn.core.math.Color]
          */
         fun fromRGB(rgb: Int): Color =
             Color((0xFF shl 24) or (rgb and 0x00FFFFFF))
