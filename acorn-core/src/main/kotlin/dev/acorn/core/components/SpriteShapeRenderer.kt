@@ -25,7 +25,7 @@ class SpriteShapeRenderer(
                 renderer.drawRect(gameObject.transform, color)
 
             ShapeType.CIRCLE ->
-                renderer.drawCircle(gameObject.transform, color, circleSegments)
+                renderer.drawCircle(gameObject.transform, color)
         }
     }
 }
