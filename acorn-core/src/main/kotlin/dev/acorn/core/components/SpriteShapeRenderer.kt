@@ -1,18 +1,24 @@
-package dev.acorn.core.gameobject
+package dev.acorn.core.components
 
-import dev.acorn.core.Color
-import dev.acorn.core.Renderer
+import dev.acorn.core.math.Color
+import dev.acorn.core.render.Renderer
+import dev.acorn.core.scene.Component
 
-enum class ShapeType {
-    RECT,
-    CIRCLE
-}
-
+/**
+ * Renders sprite shapes onto the [Renderer]
+ *
+ * @param shape The shape of the sprite
+ * @param color The color of the sprite
+ * @param circleSegments The circle segments of a sprite if the [ShapeType] is a circle
+ */
 class SpriteShapeRenderer(
     var shape: ShapeType = ShapeType.RECT,
     var color: Color = Color.WHITE,
     var circleSegments: Int = 32,
 ) : Component() {
+    /**
+     * Renders the sprite shape onto the [Renderer]
+     */
     override fun render(renderer: Renderer) {
         when(shape) {
             ShapeType.RECT ->
