@@ -14,10 +14,23 @@ import org.lwjgl.opengl.GL20.glGetUniformLocation
 import org.lwjgl.opengl.GL20.glUniformMatrix4fv
 import org.lwjgl.system.MemoryStack
 
+/**
+ * Rendering pipeline for textured sprites
+ * It uses a shared quad mesh and a shader that multiplies a tint color by the sampled texture color, with an optional circle mask
+ */
 class SpritePipeline {
     private val shader = ShaderProgram(ShaderSources.VERT, ShaderSources.FRAG)
     private val mesh = QuadMesh()
 
+    /**
+     * Draws a textured sprite
+     *
+     * @param proj 2D projection matrix (typically ortho)
+     * @param model Model matrix (translation/rotation/scale)
+     * @param tex OpenGL texture to sample
+     * @param tint RGBA color multiplied with the sampled texture color
+     * @param circleMask If true applies a circular mask in the fragment shader
+     */
     fun draw(proj: Matrix4f, model: Matrix4f, tex: DesktopTexture, tint: Color, circleMask: Boolean) {
         shader.use()
 

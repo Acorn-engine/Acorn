@@ -30,7 +30,7 @@ interface Renderer {
      * @param transform The transform of the new circle
      * @param color The color of the new circle
      */
-    fun drawCircle(transform: Transform, color: Color, segments: Int = 32)
+    fun drawCircle(transform: Transform, color: Color)
 
     /**
      * Draws a sprite at a given point

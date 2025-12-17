@@ -1,5 +1,8 @@
 package dev.acorn.desktop.gl.shader
 
+/**
+ * Centralized GLSL source strings used by the [dev.acorn.desktop.render.DesktopRenderer]
+ */
 object ShaderSources {
     const val VERT = """
         #version 330 core

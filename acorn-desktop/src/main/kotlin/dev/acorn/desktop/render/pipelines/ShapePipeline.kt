@@ -9,10 +9,22 @@ import org.lwjgl.opengl.GL20.glGetUniformLocation
 import org.lwjgl.opengl.GL20.glUniformMatrix4fv
 import org.lwjgl.system.MemoryStack
 
+/**
+ * Rendering pipeline for untextured 2D shapes
+ * It uses a shared quad mesh and a shader that can output a solid color and apply an optional mask
+ */
 class ShapePipeline {
     private val shader = ShaderProgram(ShaderSources.VERT, ShaderSources.FRAG)
     private val mesh = QuadMesh()
 
+    /**
+     * Draws a solid colored rect or circle based on [circle]
+     *
+     * @param proj 2D projection matrix (typically ortho)
+     * @param model Model matrix (translation/rotation/scale)
+     * @param color Fill color (RGBA)
+     * @param circle If true, it uses a circular mask in the fragment shader
+     */
     fun draw(proj: Matrix4f, model: Matrix4f, color: Color, circle: Boolean) {
         shader.use()
 

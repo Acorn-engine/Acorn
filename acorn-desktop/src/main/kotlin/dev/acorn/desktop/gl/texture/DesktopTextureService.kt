@@ -9,7 +9,20 @@ import org.lwjgl.stb.STBImage.*
 import org.lwjgl.system.MemoryStack.stackPush
 import java.nio.ByteBuffer
 
+/**
+ * Desktop implementation of [TextureService] using STBImage + OpenGL textures
+ * Loads image bytes from the classpath and uploads them to the GPU as RGBA
+ *
+ * @throws IllegalArgumentException if the resource cannot be found
+ * @throws IllegalStateException if STBImage fails to decode the image
+ */
 class DesktopTextureService: TextureService {
+    /**
+     * Loads an image resource from the classpath amd returns a GPU texture handle
+     *
+     * @param path resource path relative to the resources root (e.g. "sprites/player.png")
+     * @return [TextureHandle] that can be used by the renderer
+     */
     override fun load(path: String): TextureHandle {
         val resource = javaClass.classLoader.getResource(path)
             ?: throw IllegalArgumentException("Texture resource $path not found")

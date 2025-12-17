@@ -9,7 +9,16 @@ import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.opengl.GL
 import org.lwjgl.opengl.GL11.*
 
+/**
+ * The main application class for the desktop platform
+ * This class configures the windows and enables OpenGL, sets up textures, and handles the game loop
+ */
 object DesktopApplication {
+    /**
+     * Run the game
+     *
+     * @param game The acorn game to run
+     */
     fun run(game: Acorn) {
         require(glfwInit()) { "Unable to initialize GLFW" }
 

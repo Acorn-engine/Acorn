@@ -3,7 +3,14 @@ package dev.acorn.desktop.window
 import org.lwjgl.glfw.GLFW.*
 import org.lwjgl.opengl.GL11.GL_TRUE
 
+/**
+ * Applies the default GLFW window and OpenGL context hints used by Acorn
+ */
 object GlfwHints {
+    /**
+     * Applies GLFW window hints prior to window creation
+     * Must be called before glfwCreateWindow()
+     */
     fun apply() {
         glfwDefaultWindowHints()
         glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE)

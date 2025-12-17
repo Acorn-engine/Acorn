@@ -6,6 +6,15 @@ import org.lwjgl.opengl.GL20.glVertexAttribPointer
 import org.lwjgl.opengl.GL30.glBindVertexArray
 import org.lwjgl.opengl.GL30.glGenVertexArrays
 
+/**
+ * A small reusable GPU mesh representing a unit quad centered at the origin
+ *
+ * The quad is defined in local space as -0.5..0.5 on both axes and includes:
+ * - Positon attribute at location 0 (vec2)
+ * - UV attribute at location 1 (vec2)
+ *
+ * This class also creates and owns a VAO, VBO, and IBO
+ */
 class QuadMesh {
     private val vao: Int
     private val vbo: Int
@@ -41,6 +50,9 @@ class QuadMesh {
         glBindVertexArray(0)
     }
 
+    /**
+     * Draws the quad using indexed rendering
+     */
     fun draw() {
         glBindVertexArray(vao)
         glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0L)
