@@ -6,10 +6,15 @@ import org.lwjgl.glfw.*
 import org.lwjgl.glfw.GLFW.*
 
 /**
- * Handles the listeners and callbacks for desktop related input
- */
-class DesktopInput(private val window: Long): Input {
+ * Desktop input implementation backed by GLFW callbacks
+*/
+class DesktopInput(private val window: Long) : Input {
     override val events = EventBus<InputEvent>()
+
+    private val maxKeys = 512
+    private val keyDown = BooleanArray(maxKeys)
+    private val keyPressed = BooleanArray(maxKeys)
+    private val keyReleased = BooleanArray(maxKeys)
 
     private var keyCb: GLFWKeyCallback? = null
     private var mouseCb: GLFWMouseButtonCallback? = null
@@ -17,12 +22,40 @@ class DesktopInput(private val window: Long): Input {
     private var scrollCb: GLFWScrollCallback? = null
     private var charCb: GLFWCharCallback? = null
 
-    /**
-     * Set up the desktop specific input for GLFW
-     */
+    override fun beginFrame() {
+        keyPressed.fill(false)
+        keyReleased.fill(false)
+    }
+
+    override fun down(key: Int): Boolean =
+        key in 0 until maxKeys && keyDown[key]
+
+    override fun pressed(key: Int): Boolean =
+        key in 0 until maxKeys && keyPressed[key]
+
+    override fun released(key: Int): Boolean =
+        key in 0 until maxKeys && keyReleased[key]
+
     fun install() {
         keyCb = GLFWKeyCallback.create { _, key, scancode, action, mods ->
-            events.publish(KeyEvent(key, scancode, InputAction.fromGlfw(action), mods))
+            val a = InputAction.fromGlfw(action)
+            if(key in 0 until maxKeys) {
+                when(a) {
+                    InputAction.Press -> {
+                        if(!keyDown[key]) keyPressed[key] = true
+                        keyDown[key] = true
+                    }
+                    InputAction.Release -> {
+                        keyDown[key] = false
+                        keyReleased[key] = true
+                    }
+                    InputAction.Repeat -> {
+
+                    }
+                }
+            }
+
+            events.publish(KeyEvent(key, scancode, a, mods))
         }
         glfwSetKeyCallback(window, keyCb)
 
@@ -51,9 +84,6 @@ class DesktopInput(private val window: Long): Input {
         glfwSetCharCallback(window, charCb)
     }
 
-    /**
-     * Should be called when you want to freeze input, or when the game is quit
-     */
     fun destroy() {
         keyCb?.free()
         mouseCb?.free()

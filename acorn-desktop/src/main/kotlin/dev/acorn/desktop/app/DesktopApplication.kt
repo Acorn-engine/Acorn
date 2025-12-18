@@ -49,6 +49,7 @@ object DesktopApplication {
             val dt = (now - last).toFloat()
             last = now
 
+            input.beginFrame()
             window.pollEvents()
             window.windowSize(win)
             window.framebufferSize(fb)

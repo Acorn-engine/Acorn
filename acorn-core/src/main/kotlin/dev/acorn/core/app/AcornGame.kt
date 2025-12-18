@@ -126,4 +126,9 @@ abstract class AcornGame : Acorn {
      */
     protected fun spawn(transform: Transform = Transform()): GameObject =
         scene.createGameObject(transform)
+
+    /**
+     * Convenience to get context.input
+     */
+    protected val input get() = context.input
 }
