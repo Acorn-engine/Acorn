@@ -2,12 +2,29 @@ package dev.acorn.core.input
 
 import dev.acorn.core.events.EventBus
 import dev.acorn.core.events.Subscription
+import dev.acorn.core.math.Vec2
 
 /**
  * Input interface exposed to games through [dev.acorn.core.content.GameContext]
  */
 interface Input {
     val events: EventBus<InputEvent>
+
+    fun beginFrame() {}
+
+    fun down(key: Int): Boolean
+    fun pressed(key: Int): Boolean
+    fun released(key: Int): Boolean
+
+    fun axis(negativeKey: Int, positiveKey: Int): Float {
+        var v = 0f
+        if(down(negativeKey)) v -= 1f
+        if(down(negativeKey)) v += 1f
+        return v
+    }
+
+    fun axis2D(left: Int, right: Int, downKey: Int, upKey: Int): Vec2 =
+        Vec2(axis(left, right), axis(downKey, upKey))
 }
 
 fun Input.onKey(listener: (KeyEvent) -> Unit): Subscription =
