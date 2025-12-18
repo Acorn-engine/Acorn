@@ -19,7 +19,7 @@ interface Input {
     fun axis(negativeKey: Int, positiveKey: Int): Float {
         var v = 0f
         if(down(negativeKey)) v -= 1f
-        if(down(negativeKey)) v += 1f
+        if(down(positiveKey)) v += 1f
         return v
     }
 
