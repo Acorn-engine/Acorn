@@ -27,7 +27,7 @@ interface Acorn {
      *
      * @param dtSeconds The current delta seconds (frame independant seconds)
      */
-    fun update(dtSeconds: Float)
+    fun update(dt: Float)
 
     /**
      * This is where you'll clear the screen and actually render the things that are on the screen onto the window

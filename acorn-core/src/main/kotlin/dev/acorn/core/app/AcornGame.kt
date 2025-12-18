@@ -50,11 +50,11 @@ abstract class AcornGame : Acorn {
      * Final update entry point called by hte platform
      * Calls [onUpdate] first, then updates the [scene]
      *
-     * @param dtSeconds time delta since the last frame in seconds
+     * @param dt time delta since the last frame in seconds
      */
-    final override fun update(dtSeconds: Float) {
-        onUpdate(dtSeconds)
-        scene.update(dtSeconds)
+    final override fun update(dt: Float) {
+        onUpdate(dt)
+        scene.update(dt)
     }
 
     /**
@@ -89,9 +89,9 @@ abstract class AcornGame : Acorn {
      * Called every frame before the [scene] is updated
      * Use this for gameplay logic, input processing, timers, etc
      *
-     * @param dtSeconds time delta since the last frame in seconds
+     * @param dt time delta since the last frame in seconds
      */
-    protected open fun onUpdate(dtSeconds: Float) {}
+    protected open fun onUpdate(dt: Float) {}
 
     /**
      * Called every frame after the screen is cleared but before the [scene] is rendered
@@ -126,4 +126,9 @@ abstract class AcornGame : Acorn {
      */
     protected fun spawn(transform: Transform = Transform()): GameObject =
         scene.createGameObject(transform)
+
+    /**
+     * Convenience to get context.input
+     */
+    protected val input get() = context.input
 }

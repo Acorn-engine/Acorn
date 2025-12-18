@@ -3,6 +3,7 @@ package dev.acorn.desktop.app
 import dev.acorn.core.Acorn
 import dev.acorn.core.content.WindowConfig
 import dev.acorn.desktop.gl.texture.DesktopTextureService
+import dev.acorn.desktop.input.DesktopInput
 import dev.acorn.desktop.render.DesktopRenderer
 import dev.acorn.desktop.window.GlfwWindow
 import org.lwjgl.glfw.GLFW.*
@@ -33,7 +34,8 @@ object DesktopApplication {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
         val textures = DesktopTextureService()
-        val context = DesktopGameContext(config, textures)
+        val input = DesktopInput(window.handle).apply { install() }
+        val context = DesktopGameContext(config, textures, input)
         val renderer = DesktopRenderer()
 
         game.setup(context)
@@ -47,6 +49,7 @@ object DesktopApplication {
             val dt = (now - last).toFloat()
             last = now
 
+            input.beginFrame()
             window.pollEvents()
             window.windowSize(win)
             window.framebufferSize(fb)
@@ -58,6 +61,7 @@ object DesktopApplication {
             window.swapBuffers()
         }
 
+        input.destroy()
         window.destroy()
         glfwTerminate()
     }
