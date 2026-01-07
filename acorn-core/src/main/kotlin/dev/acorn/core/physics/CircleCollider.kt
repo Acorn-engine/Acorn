@@ -1,0 +1,13 @@
+package dev.acorn.core.physics
+
+import kotlin.math.min
+
+class CircleCollider : Collider() {
+    var radius: Float = 0f
+
+    internal fun effectiveRadius(): Float {
+        if(radius > 0f) return radius
+        val s = gameObject.transform.scale
+        return min(s.x, s.y) * 0.5f
+    }
+}

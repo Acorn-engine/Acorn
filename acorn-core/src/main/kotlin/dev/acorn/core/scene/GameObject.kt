@@ -8,6 +8,8 @@ import dev.acorn.core.render.Renderer
  * @param transform The transform of the [dev.acorn.core.scene.GameObject]
  */
 class GameObject(val transform: Transform = Transform()) {
+    val id: Int = nextID()
+
     private val components = mutableListOf<Component>()
 
     /**
@@ -67,5 +69,10 @@ class GameObject(val transform: Transform = Transform()) {
      */
     fun render(renderer: Renderer) {
         components.forEach { it.render(renderer) }
+    }
+
+    private companion object {
+        private var idCounter = 1
+        private fun nextID(): Int = idCounter++
     }
 }
