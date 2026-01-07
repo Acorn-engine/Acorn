@@ -1,5 +1,6 @@
 package dev.acorn.core.scene
 
+import dev.acorn.core.physics.colission.CollisionSystem
 import dev.acorn.core.render.Renderer
 
 /**
@@ -7,6 +8,7 @@ import dev.acorn.core.render.Renderer
  */
 class Scene {
     private val objects = mutableListOf<GameObject>()
+    private val collisions = CollisionSystem()
 
     /**
      * Creates a [GameObject] in the current [Scene]
@@ -28,6 +30,7 @@ class Scene {
      */
     fun update(dt: Float) {
         objects.forEach { it.update(dt) }
+        collisions.step(objects)
     }
 
     /**
@@ -39,4 +42,6 @@ class Scene {
     fun render(renderer: Renderer) {
         objects.forEach { it.render(renderer) }
     }
+
+    fun collisions(): CollisionSystem = collisions
 }

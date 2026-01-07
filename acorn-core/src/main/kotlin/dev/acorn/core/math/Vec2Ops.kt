@@ -16,3 +16,5 @@ fun Vec2.normalized(): Vec2 {
     val len = length()
     return if(len > 0f) Vec2(x / len, y / len) else Vec2(0f, 0f)
 }
+
+fun dot(a: Vec2, b: Vec2): Float = a.x * b.x + a.y * b.y

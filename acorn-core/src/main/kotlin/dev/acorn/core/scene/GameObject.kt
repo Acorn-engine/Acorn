@@ -8,6 +8,8 @@ import dev.acorn.core.render.Renderer
  * @param transform The transform of the [dev.acorn.core.scene.GameObject]
  */
 class GameObject(val transform: Transform = Transform()) {
+    val id: Int = nextID()
+
     private val components = mutableListOf<Component>()
 
     /**
@@ -44,6 +46,14 @@ class GameObject(val transform: Transform = Transform()) {
     }
 
     /**
+     * Finds all types of a [Component] on a [dev.acorn.core.scene.GameObject]
+     */
+    fun <T : Component> getComponents(type: Class<T>): List<T> {
+        @Suppress("UNCHECKED_CAST")
+        return components.filter { type.isInstance(it) } as List<T>
+    }
+
+    /**
      * Updates all the [Component]'s on the [dev.acorn.core.scene.GameObject]
      *
      * @param dt The delta seconds
@@ -59,5 +69,10 @@ class GameObject(val transform: Transform = Transform()) {
      */
     fun render(renderer: Renderer) {
         components.forEach { it.render(renderer) }
+    }
+
+    private companion object {
+        private var idCounter = 1
+        private fun nextID(): Int = idCounter++
     }
 }
