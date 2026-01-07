@@ -13,7 +13,6 @@ class TestGame : AcornGame() {
     private var time = 0f
     private lateinit var player: GameObject
 
-    private val keysDown = HashSet<Int>()
     private var moveSpeed = 250f
 
     override fun onStart() {
@@ -24,9 +23,6 @@ class TestGame : AcornGame() {
     override fun onUpdate(dt: Float) {
         time += dt
         player.transform.rotationDeg = time * 20f
-
-        if(input.pressed(Keys.Q)) moveSpeed = (moveSpeed - 50f).coerceAtLeast(50f)
-        if(input.pressed(Keys.E)) moveSpeed = (moveSpeed + 50f).coerceAtMost(2000f)
 
         val dir = input.axis2D(Keys.A, Keys.D, Keys.S, Keys.W).normalized()
         player.transform.position += dir * (moveSpeed * dt)

@@ -44,6 +44,14 @@ class GameObject(val transform: Transform = Transform()) {
     }
 
     /**
+     * Finds all types of a [Component] on a [dev.acorn.core.scene.GameObject]
+     */
+    fun <T : Component> getComponents(type: Class<T>): List<T> {
+        @Suppress("UNCHECKED_CAST")
+        return components.filter { type.isInstance(it) } as List<T>
+    }
+
+    /**
      * Updates all the [Component]'s on the [dev.acorn.core.scene.GameObject]
      *
      * @param dt The delta seconds
