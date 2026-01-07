@@ -1,7 +1,9 @@
-package dev.acorn.core.physics
+package dev.acorn.core.physics.collider
 
 import dev.acorn.core.events.EventBus
 import dev.acorn.core.math.Vec2
+import dev.acorn.core.physics.BodyType
+import dev.acorn.core.physics.event.CollisionEvent
 import dev.acorn.core.scene.Component
 import dev.acorn.core.scene.GameObject
 

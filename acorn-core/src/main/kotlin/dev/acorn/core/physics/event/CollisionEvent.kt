@@ -1,6 +1,7 @@
-package dev.acorn.core.physics
+package dev.acorn.core.physics.event
 
 import dev.acorn.core.math.Vec2
+import dev.acorn.core.physics.collider.Collider
 import dev.acorn.core.scene.GameObject
 
 

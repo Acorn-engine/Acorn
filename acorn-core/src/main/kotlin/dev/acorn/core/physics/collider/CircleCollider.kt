@@ -1,4 +1,4 @@
-package dev.acorn.core.physics
+package dev.acorn.core.physics.collider
 
 import kotlin.math.min
 

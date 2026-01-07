@@ -1,4 +1,4 @@
-package dev.acorn.core.physics
+package dev.acorn.core.physics.collider
 
 import dev.acorn.core.math.Vec2
 
