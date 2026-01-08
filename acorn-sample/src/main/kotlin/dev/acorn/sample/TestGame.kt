@@ -15,7 +15,6 @@ import dev.acorn.core.scene.Transform
 import dev.acorn.core.scene.spriteObject
 
 class TestGame : AcornGame() {
-    private var time = 0f
     private lateinit var player: GameObject
     private var moveSpeed = 250f
 
@@ -35,11 +34,14 @@ class TestGame : AcornGame() {
                 println("Player hit ${e.otherObject.id}")
             }
         }
+
+        time.every(0.25f) {
+            println("tick @ ${time.sinceStartSeconds}")
+        }
     }
 
     override fun onUpdate(dt: Float) {
-        time += dt
-        player.transform.rotationDeg = time * 20f
+        player.transform.rotationDeg = (time.sinceStartSeconds.toFloat() * 40f)
 
         val dir = input.axis2D(Keys.A, Keys.D, Keys.S, Keys.W).normalized()
         player.transform.position += dir * (moveSpeed * dt)

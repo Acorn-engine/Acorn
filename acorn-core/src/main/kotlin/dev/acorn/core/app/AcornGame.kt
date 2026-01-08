@@ -131,4 +131,9 @@ abstract class AcornGame : Acorn {
      * Convenience to get context.input
      */
     protected val input get() = context.input
+
+    /**
+     * Convenience to get context.time
+     */
+    protected val time get() = context.time
 }
