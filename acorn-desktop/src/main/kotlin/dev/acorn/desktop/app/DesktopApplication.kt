@@ -38,6 +38,8 @@ object DesktopApplication {
         val textures = DesktopTextureService()
         val input = DesktopInput(window.handle).apply { install() }
         val time = MutableTime(0.12f, 0.05f)
+        time.step(nowSeconds(), 0f)
+
         val context = DesktopGameContext(config, textures, input, time)
         val renderer = DesktopRenderer()
 

@@ -59,7 +59,7 @@ class MutableTime(
         }
 
         frame++
-        nowSeconds += monotonicNowSeconds
+        nowSeconds = monotonicNowSeconds
         sinceStartSeconds = nowSeconds - startSeconds
 
         val clamped = rawDtSeconds.coerceIn(0f, maxDeltaSeconds)
