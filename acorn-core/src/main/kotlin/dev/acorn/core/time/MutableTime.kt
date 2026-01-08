@@ -5,7 +5,7 @@ import kotlin.math.max
 /**
  * Engine owned [Time] implementation, platform updates it once per frame.
  */
-class MutableTime internal constructor(
+class MutableTime(
     private val smootherAlpha: Float = 0.12f, // 0..1, higher = less smoothing
     private val maxDeltaSeconds: Float = 0.05f // clamp to avoid big jumps (50ms)
 ) : Time {
