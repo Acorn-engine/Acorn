@@ -9,8 +9,7 @@ import dev.acorn.core.render.Renderer
  */
 class GameObject(val transform: Transform = Transform()) {
     val id: Int = nextID()
-
-    private val components = mutableListOf<Component>()
+    val components = mutableListOf<Component>()
 
     /**
      * Adds a [Component] onto a [dev.acorn.core.scene.GameObject]

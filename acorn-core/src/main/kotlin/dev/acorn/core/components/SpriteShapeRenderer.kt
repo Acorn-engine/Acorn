@@ -1,6 +1,7 @@
 package dev.acorn.core.components
 
 import dev.acorn.core.math.Color
+import dev.acorn.core.render.Renderable
 import dev.acorn.core.render.Renderer
 import dev.acorn.core.scene.Component
 
@@ -15,7 +16,9 @@ class SpriteShapeRenderer(
     var shape: ShapeType = ShapeType.RECT,
     var color: Color = Color.WHITE,
     var circleSegments: Int = 32,
-) : Component() {
+    override val layer: String = "Default",
+    override val orderInLayer: Int = 0
+) : Component(), Renderable {
     /**
      * Renders the sprite shape onto the [Renderer]
      */

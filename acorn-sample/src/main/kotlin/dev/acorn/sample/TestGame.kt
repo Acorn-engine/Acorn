@@ -21,7 +21,7 @@ class TestGame : AcornGame() {
 
     override fun onStart() {
         val playerSprite = sprite("67.jpeg")
-        player = scene.spriteObject(playerSprite, center(), Vec2(128f, 128f)).apply {
+        player = scene.spriteObject(playerSprite, center(), Vec2(128f, 128f), orderInLayer = 5).apply {
             addComponent(BoxCollider())
         }
 
