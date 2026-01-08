@@ -11,12 +11,14 @@ import dev.acorn.core.math.Vec2
  * @param sprite sprite to render
  * @param position world position (in game coordinates)
  * @param size desired size of the sprite quad (in game coordinates)
+ * @param layer The layer the object should be in
+ * @param orderInLayer What order to layer it in
  * @return the newly created and configured [GameObject]
  */
-fun Scene.spriteObject(sprite: Sprite, position: Vec2, size: Vec2): GameObject {
+fun Scene.spriteObject(sprite: Sprite, position: Vec2, size: Vec2, layer: String = "Default", orderInLayer: Int = 0): GameObject {
     return createGameObject(
         Transform(position = position, scale = size)
     ).apply {
-        addComponent(SpriteRenderer(sprite))
+        addComponent(SpriteRenderer(sprite, layer = layer, orderInLayer = orderInLayer))
     }
 }
