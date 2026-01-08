@@ -1,6 +1,8 @@
 package dev.acorn.core.scene
 
 import dev.acorn.core.physics.colission.CollisionSystem
+import dev.acorn.core.render.RenderLayers
+import dev.acorn.core.render.Renderable
 import dev.acorn.core.render.Renderer
 
 /**
@@ -9,6 +11,7 @@ import dev.acorn.core.render.Renderer
 class Scene {
     private val objects = mutableListOf<GameObject>()
     private val collisions = CollisionSystem()
+    val layers = RenderLayers()
 
     /**
      * Creates a [GameObject] in the current [Scene]
@@ -40,8 +43,31 @@ class Scene {
      * @param renderer The game [Renderer]
      */
     fun render(renderer: Renderer) {
-        objects.forEach { it.render(renderer) }
+        val batch = ArrayList<RenderCall>(objects.size * 2)
+        for(go in objects) {
+            for(c in go.components) {
+                if(c is Renderable) {
+                    batch += RenderCall(go.id, layers.get(c.layer).index, c.orderInLayer, c as Component)
+                }
+            }
+        }
+
+        batch.sortWith(compareBy<RenderCall> { it.layerIndex }
+            .thenBy { it.orderInLayer }
+            .thenBy { it.goID }
+        )
+
+        for(call in batch) {
+            call.component.render(renderer)
+        }
     }
 
     fun collisions(): CollisionSystem = collisions
+
+    private data class RenderCall(
+        val goID: Int,
+        val layerIndex: Int,
+        val orderInLayer: Int,
+        val component: Component
+    )
 }
