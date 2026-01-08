@@ -1,6 +1,7 @@
 package dev.acorn.core.components
 
 import dev.acorn.core.assets.Sprite
+import dev.acorn.core.render.Renderable
 import dev.acorn.core.render.Renderer
 import dev.acorn.core.render.SpriteMask
 import dev.acorn.core.scene.Component
@@ -10,7 +11,11 @@ import dev.acorn.core.scene.Component
  *
  * @param sprite The sprite
  */
-class SpriteRenderer(var sprite: Sprite): Component() {
+class SpriteRenderer(
+    var sprite: Sprite,
+    override val layer: String = "Default",
+    override val orderInLayer: Int = 0
+): Component(), Renderable {
     /**
      * Renders sprites onto the [Renderer] and applies [SpriteMask]'s
      *
