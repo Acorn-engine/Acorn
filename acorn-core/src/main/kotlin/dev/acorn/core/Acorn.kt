@@ -25,7 +25,7 @@ interface Acorn {
     /**
      * This function is called every frame by the acorn engine, this is where you should do player movement and general things that need to update
      *
-     * @param dtSeconds The current delta seconds (frame independant seconds)
+     * @param dt The current delta seconds (frame independant seconds)
      */
     fun update(dt: Float)
 
