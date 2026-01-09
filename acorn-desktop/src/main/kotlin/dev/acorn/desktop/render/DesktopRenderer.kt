@@ -5,6 +5,7 @@ import dev.acorn.core.math.Color
 import dev.acorn.core.render.Renderer
 import dev.acorn.core.render.SpriteMask
 import dev.acorn.core.scene.Transform
+import dev.acorn.core.window.Window
 import dev.acorn.desktop.gl.texture.DesktopTexture
 import dev.acorn.desktop.render.pipelines.ShapePipeline
 import dev.acorn.desktop.render.pipelines.SpritePipeline
@@ -26,14 +27,12 @@ class DesktopRenderer : Renderer {
     /**
      * Prepares the renderer for the current frame
      *
-     * @param windowW logical window width in screen coordinates
-     * @param windowH logical window height in screen coordinates
-     * @param framebufferW framebuffer width in pixels (may differ in HiDPI displays)
-     * @param framebufferH framebuffer height in pixels (may differ in HiDPI displays)
-     */
-    fun beginFrame(windowW: Int, windowH: Int, framebufferW: Int, framebufferH: Int) {
-        glViewport(0, 0, framebufferW, framebufferH)
-        projection.setOrtho2D(0f, windowW.toFloat(), 0f, windowH.toFloat())
+     * @param window The current window
+    */
+    fun beginFrame(window: Window) {
+        val vp = window.viewport
+        glViewport(vp.x, vp.y, vp.width, vp.height)
+        projection.setOrtho2D(0f, window.virtualWidth.toFloat(), 0f, window.virtualHeight.toFloat())
     }
 
     /**

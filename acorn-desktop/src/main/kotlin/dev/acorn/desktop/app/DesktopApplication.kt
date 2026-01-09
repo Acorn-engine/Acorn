@@ -26,7 +26,10 @@ object DesktopApplication {
     fun run(game: Acorn) {
         require(glfwInit()) { "Unable to initialize GLFW" }
 
-        val config = WindowConfig()
+        val config = WindowConfig().also { game.configureWindow(it) }
+        if(config.virtualWidth <= 0) config.virtualWidth = config.width
+        if(config.virtualHeight <= 0) config.virtualHeight = config.height
+
         game.configureWindow(config)
 
         val window = GlfwWindow(config.width, config.height, config.title, config.fullscreen)
@@ -43,7 +46,13 @@ object DesktopApplication {
 
         val win = IntArray(2)
         val fb = IntArray(2)
-        val windowState = DesktopWindowState(config.width, config.height)
+        val windowState = DesktopWindowState(
+            config.width,
+            config.height,
+            config.virtualWidth,
+            config.virtualHeight,
+            config.scaleMode
+        )
 
         val context = DesktopGameContext(windowState, textures, input, time)
         val renderer = DesktopRenderer()
@@ -66,12 +75,7 @@ object DesktopApplication {
             window.framebufferSize(fb)
 
             windowState.update(win[0], win[1], fb[0], fb[1])
-            renderer.beginFrame(
-                windowState.width,
-                windowState.height,
-                windowState.framebufferWidth,
-                windowState.framebufferHeight,
-            )
+            renderer.beginFrame(windowState)
 
             game.update(time.deltaSeconds)
             game.render(renderer)

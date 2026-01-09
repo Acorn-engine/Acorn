@@ -106,7 +106,7 @@ abstract class AcornGame : Acorn {
      * Returns the center point of the current window in game coordinates
      */
     protected fun center(): Vec2 =
-        Vec2(context.window.width / 2f, context.window.height / 2f)
+        Vec2(context.window.virtualWidth / 2f, context.window.virtualHeight / 2f)
 
     /**
      * Loads a texture from the resources and wraps it as a [Sprite]

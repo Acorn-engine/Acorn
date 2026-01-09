@@ -15,5 +15,10 @@ interface Window {
     val framebufferWidth: Int
     val framebufferHeight: Int
 
+    val virtualWidth: Int
+    val virtualHeight: Int
+
+    val viewport: Viewport
+
     val events: EventBus<WindowEvent>
 }
