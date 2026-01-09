@@ -3,6 +3,7 @@ package dev.acorn.core.content
 import dev.acorn.core.assets.TextureService
 import dev.acorn.core.input.Input
 import dev.acorn.core.time.Time
+import dev.acorn.core.window.Window
 
 /**
  * Stores information about the game
@@ -13,7 +14,7 @@ import dev.acorn.core.time.Time
  * @property time The time service
  */
 interface GameContext {
-    val window: WindowConfig
+    val window: Window
     val textures: TextureService
     val input: Input
     val time: Time
