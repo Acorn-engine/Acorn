@@ -6,6 +6,7 @@ import dev.acorn.core.time.MutableTime
 import dev.acorn.desktop.gl.texture.DesktopTextureService
 import dev.acorn.desktop.input.DesktopInput
 import dev.acorn.desktop.render.DesktopRenderer
+import dev.acorn.desktop.window.DesktopWindowState
 import dev.acorn.desktop.window.GlfwWindow
 import org.lwjgl.glfw.GLFW.glfwInit
 import org.lwjgl.glfw.GLFW.glfwTerminate
@@ -40,13 +41,15 @@ object DesktopApplication {
         val time = MutableTime(0.12f, 0.05f)
         time.step(nowSeconds(), 0f)
 
-        val context = DesktopGameContext(config, textures, input, time)
+        val win = IntArray(2)
+        val fb = IntArray(2)
+        val windowState = DesktopWindowState(config.width, config.height)
+
+        val context = DesktopGameContext(windowState, textures, input, time)
         val renderer = DesktopRenderer()
 
         game.setup(context)
 
-        val win = IntArray(2)
-        val fb = IntArray(2)
         var last = nowSeconds()
 
         while(!window.shouldClose()) {
@@ -56,10 +59,19 @@ object DesktopApplication {
 
             input.beginFrame()
             time.step(now, rawDt)
+
             window.pollEvents()
+
             window.windowSize(win)
             window.framebufferSize(fb)
-            renderer.beginFrame(win[0], win[1], fb[0], fb[1])
+
+            windowState.update(win[0], win[1], fb[0], fb[1])
+            renderer.beginFrame(
+                windowState.width,
+                windowState.height,
+                windowState.framebufferWidth,
+                windowState.framebufferHeight,
+            )
 
             game.update(time.deltaSeconds)
             game.render(renderer)
