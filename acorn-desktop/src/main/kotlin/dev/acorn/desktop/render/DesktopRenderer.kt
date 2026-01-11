@@ -72,7 +72,11 @@ class DesktopRenderer : Renderer {
     }
 
     override fun drawLine(a: Vec2, b: Vec2, color: Color) {
+        val depthWasEnabled = glIsEnabled(GL_DEPTH_TEST)
+        if(depthWasEnabled) glDisable(GL_DEPTH_TEST)
+
         linePipeline.draw(projection, a, b, color)
+        if(depthWasEnabled) glEnable(GL_DEPTH_TEST)
     }
 
     /**
