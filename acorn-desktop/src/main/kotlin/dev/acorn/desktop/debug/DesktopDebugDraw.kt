@@ -17,12 +17,13 @@ class DesktopDebugDraw : DebugDraw {
         var i = 0
         while(i < cmds.size) {
             val c = cmds[i]
-            if(c.ttl > 0f) {
+            if (c.ttl != Float.POSITIVE_INFINITY) {
                 c.ttl -= dtSeconds
-                if(c.ttl <= 0f) {
-                    cmds.removeAt(i)
-                    continue
-                }
+            }
+
+            if (c.ttl != Float.POSITIVE_INFINITY && c.ttl <= 0f) {
+                cmds.removeAt(i)
+                continue
             }
 
             i++
@@ -87,7 +88,8 @@ class DesktopDebugDraw : DebugDraw {
         }
     }
 
-    private fun ttlFor(seconds: Float): Float = if(seconds <= 0f) 0f else seconds
+    private fun ttlFor(seconds: Float): Float =
+        if(seconds <= 0f) Float.POSITIVE_INFINITY else seconds
 
     private sealed class Cmd(var ttl: Float) {
         class Line(val a: Vec2, val b: Vec2, val color: Color, ttl: Float) : Cmd(ttl)
