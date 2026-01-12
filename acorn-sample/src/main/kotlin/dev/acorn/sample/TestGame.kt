@@ -43,7 +43,6 @@ class TestGame : AcornGame() {
 
         debug.line(Vec2(20f, 20f), Vec2(200f, 200f))
         debug.circle(center(), 120f, color = Color.RED, seconds = 2f)
-        debug.bounds(player)
     }
 
     override fun onUpdate(dt: Float) {
@@ -51,5 +50,6 @@ class TestGame : AcornGame() {
 
         val dir = input.axis2D(Keys.A, Keys.D, Keys.S, Keys.W).normalized()
         player.transform.position += dir * (moveSpeed * dt)
+        debug.bounds(player, seconds = 0.1f)
     }
 }
