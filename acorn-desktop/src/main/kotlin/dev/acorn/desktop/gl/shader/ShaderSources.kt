@@ -50,4 +50,25 @@ object ShaderSources {
             FragColor = base;
         }
     """
+
+    const val LINE_VERT = """
+        #version 330 core
+        layout(location = 0) in vec2 aPos;
+        
+        uniform mat4 uProjection;
+        
+        void main() {
+            gl_Position = uProjection * vec4(aPos, 0.0, 1.0);
+        }
+    """
+
+    const val LINE_FRAG = """
+        #version 330 core
+        uniform vec4 uColor;
+        out vec4 FragColor;
+        
+        void main() {
+            FragColor = uColor;
+        }
+    """
 }

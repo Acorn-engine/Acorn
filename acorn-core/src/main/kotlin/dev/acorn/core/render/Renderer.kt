@@ -2,6 +2,7 @@ package dev.acorn.core.render
 
 import dev.acorn.core.assets.Sprite
 import dev.acorn.core.math.Color
+import dev.acorn.core.math.Vec2
 import dev.acorn.core.scene.Transform
 
 /**
@@ -40,4 +41,9 @@ interface Renderer {
      * @param mask The sprite mask
      */
     fun drawSprite(transform: Transform, sprite: Sprite, mask: SpriteMask)
+
+    /**
+     * Draws a single 2D line segment
+     */
+    fun drawLine(a: Vec2, b: Vec2, color: Color)
 }

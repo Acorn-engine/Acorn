@@ -3,6 +3,7 @@ package dev.acorn.sample
 import dev.acorn.core.app.AcornGame
 import dev.acorn.core.components.SpriteShapeRenderer
 import dev.acorn.core.input.Keys
+import dev.acorn.core.math.Color
 import dev.acorn.core.math.Vec2
 import dev.acorn.core.math.normalized
 import dev.acorn.core.math.plusAssign
@@ -13,6 +14,7 @@ import dev.acorn.core.physics.event.CollisionEnter
 import dev.acorn.core.scene.GameObject
 import dev.acorn.core.scene.Transform
 import dev.acorn.core.scene.spriteObject
+import dev.acorn.desktop.debug.bounds
 
 class TestGame : AcornGame() {
     private lateinit var player: GameObject
@@ -38,6 +40,9 @@ class TestGame : AcornGame() {
         time.every(0.25f) {
             println("tick @ ${time.sinceStartSeconds}")
         }
+
+        debug.line(Vec2(20f, 20f), Vec2(200f, 200f))
+        debug.circle(center(), 120f, color = Color.RED, seconds = 2f)
     }
 
     override fun onUpdate(dt: Float) {
@@ -45,5 +50,6 @@ class TestGame : AcornGame() {
 
         val dir = input.axis2D(Keys.A, Keys.D, Keys.S, Keys.W).normalized()
         player.transform.position += dir * (moveSpeed * dt)
+        debug.bounds(player, seconds = 0.1f)
     }
 }

@@ -2,11 +2,13 @@ package dev.acorn.desktop.render
 
 import dev.acorn.core.assets.Sprite
 import dev.acorn.core.math.Color
+import dev.acorn.core.math.Vec2
 import dev.acorn.core.render.Renderer
 import dev.acorn.core.render.SpriteMask
 import dev.acorn.core.scene.Transform
 import dev.acorn.core.window.Window
 import dev.acorn.desktop.gl.texture.DesktopTexture
+import dev.acorn.desktop.render.pipelines.LinePipeline
 import dev.acorn.desktop.render.pipelines.ShapePipeline
 import dev.acorn.desktop.render.pipelines.SpritePipeline
 import org.joml.Matrix4f
@@ -22,6 +24,7 @@ import org.lwjgl.opengl.GL11.*
 class DesktopRenderer : Renderer {
     private val shapePipeline = ShapePipeline()
     private val spritePipeline = SpritePipeline()
+    private val linePipeline = LinePipeline()
     private val projection = Matrix4f()
 
     /**
@@ -66,6 +69,14 @@ class DesktopRenderer : Renderer {
         val tex = sprite.texture as DesktopTexture
 
         spritePipeline.draw(projection, modelFrom(transform), tex, sprite.tint, mask is SpriteMask.Circle)
+    }
+
+    override fun drawLine(a: Vec2, b: Vec2, color: Color) {
+        val depthWasEnabled = glIsEnabled(GL_DEPTH_TEST)
+        if(depthWasEnabled) glDisable(GL_DEPTH_TEST)
+
+        linePipeline.draw(projection, a, b, color)
+        if(depthWasEnabled) glEnable(GL_DEPTH_TEST)
     }
 
     /**
