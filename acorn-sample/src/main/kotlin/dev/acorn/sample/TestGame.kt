@@ -3,6 +3,7 @@ package dev.acorn.sample
 import dev.acorn.core.app.AcornGame
 import dev.acorn.core.components.SpriteShapeRenderer
 import dev.acorn.core.input.Keys
+import dev.acorn.core.input.click.Clickable
 import dev.acorn.core.math.Color
 import dev.acorn.core.math.Vec2
 import dev.acorn.core.math.normalized
@@ -14,7 +15,6 @@ import dev.acorn.core.physics.event.CollisionEnter
 import dev.acorn.core.scene.GameObject
 import dev.acorn.core.scene.Transform
 import dev.acorn.core.scene.spriteObject
-import dev.acorn.desktop.debug.bounds
 
 class TestGame : AcornGame() {
     private lateinit var player: GameObject
@@ -26,9 +26,14 @@ class TestGame : AcornGame() {
             addComponent(BoxCollider())
         }
 
-        spawn(Transform(position = Vec2(center().x + 200f, center().y), scale = Vec2(150f, 300f))).apply {
+        val rect = spawn(Transform(position = Vec2(center().x + 200f, center().y), scale = Vec2(150f, 300f))).apply {
             addComponent(SpriteShapeRenderer())
             addComponent(BoxCollider().apply { bodyType = BodyType.Static })
+            addComponent(Clickable())
+        }
+
+        rect.getComponent(Clickable::class.java)?.onClick {
+            println("Button clicked at ${it.mousePosition}")
         }
 
         scene.collisions().events.subscribe { e ->
@@ -50,6 +55,5 @@ class TestGame : AcornGame() {
 
         val dir = input.axis2D(Keys.A, Keys.D, Keys.S, Keys.W).normalized()
         player.transform.position += dir * (moveSpeed * dt)
-        debug.bounds(player, seconds = 10f)
     }
 }

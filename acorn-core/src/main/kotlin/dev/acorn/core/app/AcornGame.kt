@@ -43,6 +43,7 @@ abstract class AcornGame : Acorn {
      */
     final override fun setup(context: GameContext) {
         this.context = context
+        scene.initializeInput(context.input, context.window)
         onStart()
     }
 
