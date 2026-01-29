@@ -50,6 +50,6 @@ class TestGame : AcornGame() {
 
         val dir = input.axis2D(Keys.A, Keys.D, Keys.S, Keys.W).normalized()
         player.transform.position += dir * (moveSpeed * dt)
-        debug.bounds(player, seconds = 0.1f)
+        debug.bounds(player, seconds = 10f)
     }
 }
