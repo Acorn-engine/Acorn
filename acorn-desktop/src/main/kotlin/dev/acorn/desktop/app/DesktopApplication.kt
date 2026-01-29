@@ -84,6 +84,7 @@ object DesktopApplication {
             game.update(time.deltaSeconds)
             game.render(renderer)
             debug.render(renderer)
+            renderer.endFrame()
 
             window.swapBuffers()
         }
