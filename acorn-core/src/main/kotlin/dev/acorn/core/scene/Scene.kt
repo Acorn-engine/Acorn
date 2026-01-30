@@ -1,9 +1,12 @@
 package dev.acorn.core.scene
 
+import dev.acorn.core.input.Input
+import dev.acorn.core.input.click.ClickSystem
 import dev.acorn.core.physics.colission.CollisionSystem
 import dev.acorn.core.render.RenderLayers
 import dev.acorn.core.render.Renderable
 import dev.acorn.core.render.Renderer
+import dev.acorn.core.window.Window
 
 /**
  * The scene contains all the objects in the game, think of this like a "level"
@@ -11,7 +14,18 @@ import dev.acorn.core.render.Renderer
 class Scene {
     private val objects = mutableListOf<GameObject>()
     private val collisions = CollisionSystem()
+    private val clicks = ClickSystem()
     val layers = RenderLayers()
+
+    /**
+     * Initializes input-dependent systems (e.g., click detection)
+     *
+     * @param input The input service
+     * @param window The window service
+     */
+    fun initializeInput(input: Input, window: Window) {
+        clicks.initialize(input, window)
+    }
 
     /**
      * Creates a [GameObject] in the current [Scene]
@@ -34,6 +48,7 @@ class Scene {
     fun update(dt: Float) {
         objects.forEach { it.update(dt) }
         collisions.step(objects)
+        clicks.step(objects)
     }
 
     /**
@@ -63,6 +78,8 @@ class Scene {
     }
 
     fun collisions(): CollisionSystem = collisions
+
+    fun clicks(): ClickSystem = clicks
 
     private data class RenderCall(
         val goID: Int,

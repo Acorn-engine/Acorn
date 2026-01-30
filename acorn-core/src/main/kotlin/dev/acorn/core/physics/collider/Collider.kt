@@ -18,7 +18,7 @@ abstract class Collider : Component() {
 
     val events: EventBus<CollisionEvent> = EventBus()
 
-    internal fun worldCenter(go: GameObject): Vec2 =
+    fun worldCenter(go: GameObject): Vec2 =
         Vec2(go.transform.position.x + offset.x, go.transform.position.y + offset.y)
 
     private companion object {
