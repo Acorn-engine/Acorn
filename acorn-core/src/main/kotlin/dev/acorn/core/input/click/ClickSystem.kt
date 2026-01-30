@@ -100,10 +100,15 @@ class ClickSystem {
 
     private fun screenToWorld(screenX: Float, screenY: Float): Vec2 {
         val w = window ?: return Vec2(screenX, screenY)
-        val vp = w.viewport
 
-        val localX = screenX - vp.x
-        val localY = screenY - vp.y
+        val fbScaleX = w.framebufferWidth.toFloat() / w.width.toFloat()
+        val fbScaleY = w.framebufferHeight.toFloat() / w.height.toFloat()
+        val fbX = screenX * fbScaleX
+        val fbY = screenY * fbScaleY
+
+        val vp = w.viewport
+        val localX = fbX - vp.x
+        val localY = fbY - vp.y
 
         val worldX = localX / vp.scaleX
         val worldY = localY / vp.scaleY
