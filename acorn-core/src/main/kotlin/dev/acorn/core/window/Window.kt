@@ -7,6 +7,7 @@ import dev.acorn.core.events.EventBus
  *
  * - width/height are logical window units (points on macOS Retina)
  * - framebufferWidth/framebufferHeight are real pixel dimensions
+ * - icon, set to a resource path in your game, example: "mylogo.png", this is not currently available on MacOS
  */
 interface Window {
     val width: Int
@@ -21,4 +22,6 @@ interface Window {
     val viewport: Viewport
 
     val events: EventBus<WindowEvent>
+
+    var icon: String?
 }
