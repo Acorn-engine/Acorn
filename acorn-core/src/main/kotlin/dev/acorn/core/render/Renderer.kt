@@ -1,9 +1,11 @@
 package dev.acorn.core.render
 
 import dev.acorn.core.assets.Sprite
+import dev.acorn.core.assets.font.Font
 import dev.acorn.core.math.Color
 import dev.acorn.core.math.Vec2
 import dev.acorn.core.scene.Transform
+import dev.acorn.core.text.TextAlign
 
 /**
  * The main renderer for Acorn, this handles the drawing of shapes, drawing of sprites, clearing the screen, and eventually more
@@ -46,4 +48,15 @@ interface Renderer {
      * Draws a single 2D line segment
      */
     fun drawLine(a: Vec2, b: Vec2, color: Color)
+
+    /**
+     * Draws text at a given position
+     *
+     * @param text The text string to render
+     * @param transform The transform for position, rotation, and scale
+     * @param font The font to use for rendering
+     * @param color Color of the text
+     * @param align Horizontal text alignment relative to the transform position
+     */
+    fun drawText(text: String, transform: Transform, font: Font, color: Color, align: TextAlign = TextAlign.LEFT)
 }
