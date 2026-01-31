@@ -53,8 +53,12 @@ object DesktopApplication {
             config.height,
             config.virtualWidth,
             config.virtualHeight,
-            config.scaleMode
+            config.scaleMode,
+            onIconChanged = { path -> window.setIcon(path) }
         )
+
+        // Set the initial icon (default is "acorn.png")
+        window.setIcon(windowState.icon)
 
         val context = DesktopGameContext(windowState, textures, input, time, debug)
         val renderer = DesktopRenderer()

@@ -10,7 +10,8 @@ class DesktopWindowState(
     initialHeight: Int,
     override val virtualWidth: Int,
     override val virtualHeight: Int,
-    private val scaleMode: WindowScaleMode
+    private val scaleMode: WindowScaleMode,
+    private val onIconChanged: (String?) -> Unit = {}
 ) : Window {
     override var width: Int = initialWidth
         private set
@@ -33,6 +34,12 @@ class DesktopWindowState(
         private set
 
     override val events = EventBus<WindowEvent>()
+
+    override var icon: String? = "acorn.png"
+        set(value) {
+            field = value
+            onIconChanged(value)
+        }
 
     fun update(windowW: Int, windowH: Int, fbW: Int, fbH: Int) {
         val windowChanged = windowW != width || windowH != height
