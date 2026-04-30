@@ -1,6 +1,7 @@
 package dev.acorn.core.app
 
 import dev.acorn.core.Acorn
+import dev.acorn.core.assets.Font
 import dev.acorn.core.assets.Sprite
 import dev.acorn.core.content.GameContext
 import dev.acorn.core.content.WindowConfig
@@ -130,7 +131,11 @@ abstract class AcornGame : Acorn {
 
     protected val window get() = context.window
     protected val textures get() = context.textures
+    protected val fonts get() = context.fonts
     protected val input get() = context.input
     protected val time get() = context.time
     protected val debug get() = context.debug
+
+    protected fun font(path: String, size: Float = 32f): Font =
+        Font(context.fonts.load(path, size))
 }

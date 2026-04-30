@@ -1,5 +1,6 @@
 package dev.acorn.core.render
 
+import dev.acorn.core.assets.Font
 import dev.acorn.core.assets.Sprite
 import dev.acorn.core.math.Color
 import dev.acorn.core.math.Vec2
@@ -46,4 +47,15 @@ interface Renderer {
      * Draws a single 2D line segment
      */
     fun drawLine(a: Vec2, b: Vec2, color: Color)
+
+    /**
+     * Draws a string of text at the given transform's position
+     *
+     * @param transform The transform (position is the baseline-left anchor, scale is a pixel multiplier)
+     * @param text The string to draw
+     * @param font The font to use
+     * @param color The text color
+     * @param align Horizontal alignment relative to the transform position
+     */
+    fun drawText(transform: Transform, text: String, font: Font, color: Color, align: TextAlign = TextAlign.LEFT)
 }

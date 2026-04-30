@@ -1,5 +1,6 @@
 package dev.acorn.core.content
 
+import dev.acorn.core.assets.FontService
 import dev.acorn.core.assets.TextureService
 import dev.acorn.core.debug.DebugDraw
 import dev.acorn.core.input.Input
@@ -18,6 +19,7 @@ import dev.acorn.core.window.Window
 interface GameContext {
     val window: Window
     val textures: TextureService
+    val fonts: FontService
     val input: Input
     val time: Time
     val debug: DebugDraw

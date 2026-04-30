@@ -1,5 +1,6 @@
 package dev.acorn.desktop.app
 
+import dev.acorn.core.assets.FontService
 import dev.acorn.core.assets.TextureService
 import dev.acorn.core.content.GameContext
 import dev.acorn.core.debug.DebugDraw
@@ -13,6 +14,7 @@ import dev.acorn.core.window.Window
 class DesktopGameContext(
     override val window: Window,
     override val textures: TextureService,
+    override val fonts: FontService,
     override val input: Input,
     override val time: Time,
     override val debug: DebugDraw

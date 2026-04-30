@@ -4,6 +4,7 @@ import dev.acorn.core.Acorn
 import dev.acorn.core.content.WindowConfig
 import dev.acorn.core.time.MutableTime
 import dev.acorn.desktop.debug.DesktopDebugDraw
+import dev.acorn.desktop.gl.font.DesktopFontService
 import dev.acorn.desktop.gl.texture.DesktopTextureService
 import dev.acorn.desktop.input.DesktopInput
 import dev.acorn.desktop.render.DesktopRenderer
@@ -41,6 +42,7 @@ object DesktopApplication {
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
 
         val textures = DesktopTextureService()
+        val fonts = DesktopFontService()
         val input = DesktopInput(window.handle).apply { install() }
         val time = MutableTime(0.12f, 0.05f)
         time.step(nowSeconds(), 0f)
@@ -60,7 +62,7 @@ object DesktopApplication {
         // Set the initial icon (default is "acorn.png")
         window.setIcon(windowState.icon)
 
-        val context = DesktopGameContext(windowState, textures, input, time, debug)
+        val context = DesktopGameContext(windowState, textures, fonts, input, time, debug)
         val renderer = DesktopRenderer()
 
         game.setup(context)

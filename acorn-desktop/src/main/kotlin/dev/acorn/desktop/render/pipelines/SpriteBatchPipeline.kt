@@ -114,6 +114,61 @@ class SpriteBatchPipeline {
     }
 
     /**
+     * Queues a pre-computed glyph quad for batched drawing.
+     *
+     * Takes world-space corners and atlas UV coordinates directly rather than a
+     * [Transform], since glyph positions are computed by STB TrueType.
+     *
+     * @param x0 left world X
+     * @param y0 bottom world Y
+     * @param x1 right world X
+     * @param y1 top world Y
+     * @param u0 left atlas U
+     * @param v0 bottom atlas V (already flipped to GL convention)
+     * @param u1 right atlas U
+     * @param v1 top atlas V (already flipped to GL convention)
+     */
+    fun drawGlyph(
+        x0: Float, y0: Float, x1: Float, y1: Float,
+        u0: Float, v0: Float, u1: Float, v1: Float,
+        tex: DesktopTexture, color: Color
+    ) {
+        if (tex.id != currentTextureId || spriteCount >= MAX_SPRITES) {
+            flush()
+            currentTextureId = tex.id
+        }
+
+        val r = color.r
+        val g = color.g
+        val b = color.b
+        val a = color.a
+        val offset = spriteCount * SpriteBatchMesh.FLOATS_PER_SPRITE
+
+        // 4 corners: bottom-left, bottom-right, top-right, top-left
+        val wx = floatArrayOf(x0, x1, x1, x0)
+        val wy = floatArrayOf(y0, y0, y1, y1)
+        val uvx = floatArrayOf(u0, u1, u1, u0)
+        val uvy = floatArrayOf(v0, v0, v1, v1)
+
+        for (v in 0 until 4) {
+            val vi = offset + v * SpriteBatchMesh.FLOATS_PER_VERTEX
+            buffer[vi + 0] = wx[v]
+            buffer[vi + 1] = wy[v]
+            buffer[vi + 2] = uvx[v]
+            buffer[vi + 3] = uvy[v]
+            buffer[vi + 4] = r
+            buffer[vi + 5] = g
+            buffer[vi + 6] = b
+            buffer[vi + 7] = a
+            buffer[vi + 8] = 0f   // local.x (unused for glyphs)
+            buffer[vi + 9] = 0f   // local.y (unused for glyphs)
+            buffer[vi + 10] = 0f  // maskType = none
+        }
+
+        spriteCount++
+    }
+
+    /**
      * Flushes any accumulated sprites to the GPU. Call this before drawing
      * non-batched geometry (shapes, lines) to preserve render order.
      */

@@ -1,6 +1,7 @@
 package dev.acorn.sample
 
 import dev.acorn.core.app.AcornGame
+import dev.acorn.core.assets.Font
 import dev.acorn.core.components.SpriteShapeRenderer
 import dev.acorn.core.input.Keys
 import dev.acorn.core.input.click.Clickable
@@ -12,15 +13,20 @@ import dev.acorn.core.math.times
 import dev.acorn.core.physics.BodyType
 import dev.acorn.core.physics.collider.BoxCollider
 import dev.acorn.core.physics.event.CollisionEnter
+import dev.acorn.core.render.Renderer
+import dev.acorn.core.render.TextAlign
 import dev.acorn.core.scene.GameObject
 import dev.acorn.core.scene.Transform
 import dev.acorn.core.scene.spriteObject
 
 class TestGame : AcornGame() {
     private lateinit var player: GameObject
+    private lateinit var arial: Font
     private var moveSpeed = 250f
 
     override fun onStart() {
+        arial = font("ARIAL.TTF", 32f)
+
         val playerSprite = sprite("67.jpeg")
         player = scene.spriteObject(playerSprite, center(), Vec2(128f, 128f)).apply {
             addComponent(BoxCollider())
@@ -48,6 +54,10 @@ class TestGame : AcornGame() {
 
         debug.line(Vec2(20f, 20f), Vec2(200f, 200f))
         debug.circle(center(), 120f, color = Color.RED, seconds = 2f)
+    }
+
+    override fun onRender(renderer: Renderer) {
+        renderer.drawText(Transform(center(), scale = Vec2(1f, 1f)), "Hello Acorn", arial, Color.WHITE, TextAlign.CENTER)
     }
 
     override fun onUpdate(dt: Float) {
